@@ -36,6 +36,10 @@ out/
 ### VS Code ###
 .vscode/
 
+#======================================================================================================ingu add
+
+src/main/resources/application.yml
+
 #=======================================================================================================gitignore.io
 
 # Created by https://www.toptal.com/developers/gitignore/api/macos,java,gradle,intellij,vs
