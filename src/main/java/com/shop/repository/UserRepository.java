@@ -1,11 +1,14 @@
 package com.shop.repository;
 
-import com.shop.repository.dto.SampleDto;
-import org.apache.ibatis.annotations.Mapper;
+import com.shop.repository.dto.UserDto;
 import org.springframework.stereotype.Repository;
 
-@Mapper
+import java.util.List;
+
 @Repository
-public interface SampleRepository {
-    SampleDto findAll();
+public interface UserRepository {
+    List<UserDto> findAll();
+    int insert(UserDto userDto);
+    int modify(UserDto userDto);
+    int delete(Long id);
 }

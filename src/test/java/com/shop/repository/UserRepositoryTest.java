@@ -1,7 +1,6 @@
-package com.shop.crud;
+package com.shop.repository;
 
 
-import com.shop.repository.UserRepository;
 import com.shop.repository.dto.UserDto;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
@@ -10,17 +9,20 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 @SpringBootTest
 @Slf4j
-public class crudTest {
+public class UserRepositoryTest {
 
     @Autowired UserRepository userRepository;
 
+
     @Test
     @Order(1)
-    @DisplayName("creat")
+    @DisplayName("C")
     void createUser(){
-        UserDto userDto = UserDto.createUser("test4Email@google.com", "pwd2", "test-min");
+        UserDto userDto = UserDto.createUser("testhhh24Email@google.com", "pwd2", "sojin");
 
         System.out.println(userDto);
         System.out.println(userRepository.insert(userDto));
@@ -28,9 +30,30 @@ public class crudTest {
 
     @Test
     @Order(2)
-    @DisplayName("findAll")
+    @DisplayName("R")
     void findAllUser(){
-        System.out.println(userRepository.findAll().toString());
+        printList(userRepository.findAll());
+    }
+
+    void printList(List<UserDto> users){
+        users.forEach(System.out::println);
+    }
+
+    @Test
+    @Order(3)
+    @DisplayName("U")
+    void modify(){
+        UserDto userDto = UserDto.updateAddress(2L, "123456", "sample", "sample, smaple");
+
+        System.out.println(userDto);
+        System.out.println(userRepository.modify(userDto));
+    }
+
+    @Test
+    @Order(4)
+    @DisplayName("D")
+    void delete(){
+        System.out.println(userRepository.delete(7L));
     }
 
 }
