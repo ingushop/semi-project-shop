@@ -14,16 +14,18 @@ public class ProductDTO {
     private Long modelId;
     private Long color;
     private String code;
+    private String status;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
     @Builder
-    public ProductDTO(Long id, Long modelId, Long color, String code,
+    public ProductDTO(Long id, Long modelId, Long color, String code, String status,
                       LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.id = id;
         this.modelId = modelId;
         this.color = color;
         this.code = code;
+        this.status = status;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
     }// constructor

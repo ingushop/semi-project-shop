@@ -18,14 +18,14 @@ public class DeliveryDTO {
     private String zip;
     private String address;
     private String addressDetail;
+    private String status;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
-    private String status;
 
 
     @Builder
-    public DeliveryDTO(Long id, Long orderId, String trackingNum, String receiverName, String receiverPhone,
-                       String zip, String address, String addressDetail, LocalDateTime createdDate, LocalDateTime modifiedDate, String status) {
+    public DeliveryDTO(Long id, Long orderId, String trackingNum, String receiverName, String receiverPhone, String zip,
+                       String address, String addressDetail, String status, LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.id = id;
         this.orderId = orderId;
         this.trackingNum = trackingNum;
