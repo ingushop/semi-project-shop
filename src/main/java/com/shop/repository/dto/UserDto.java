@@ -1,9 +1,6 @@
 package com.shop.repository.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.sql.Timestamp;
 
@@ -18,11 +15,9 @@ public class UserDto {
     private String zip;
     private String address;
     private String address_detail;
+    private String status;
     private Timestamp created_dt;
     private Timestamp modified_dt;
-    private Long cash;
-    private Long point;
-    private String status;
 
 
     @Builder
@@ -33,11 +28,9 @@ public class UserDto {
         this.name = name;
         this.zip = zip;
         this.address = address;
+        this.status = status;
         this.address_detail = address_detail;
         this.modified_dt = modified_dt;
-        this.cash = cash;
-        this.point = point;
-        this.status = status;
     }
 
     public static UserDto createUser(String email, String pwd, String name){
@@ -54,7 +47,7 @@ public class UserDto {
                 .zip(zip)
                 .address(address)
                 .address_detail(address_detai)
-                .modified_dt(new Timestamp(System.currentTimeMillis()))
+                .modified_dt(new Timestamp(2099,12,31,0,0,0,0))
                 .build();
     }
 
