@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shop.repository.UserRepository">
+    <select id="findAll" resultType="UserDto">
+        SELECT
+            *
+        FROM
+            user_tb
+    </select>
+
+    <insert id="insert" parameterType="UserDto">
+        INSERT INTO
+            user_tb(email, pwd, name)
+        values
+            (#{email}, #{pwd}, #{name})
+    </insert>
+
+    <update id="modify" parameterType="UserDto">
+        UPDATE user_tb
+        SET
+            zip = #{zip},
+            address = #{address},
+            address_detail = #{address_detail},
+            modified_dt = #{modified_dt}
+        WHERE
+            id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM user_tb
+        WHERE id = #{id}
+    </delete>
+
+</mapper>
