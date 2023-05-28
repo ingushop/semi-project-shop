@@ -1,7 +1,7 @@
 package com.shop.repository;
 
 
-import com.shop.repository.dto.UserDto;
+import com.shop.repository.dto.UserDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
@@ -22,7 +22,7 @@ public class UserRepositoryTest {
     @Order(1)
     @DisplayName("C")
     void createUser(){
-        UserDto userDto = UserDto.createUser("testhhh24Email@google.com", "pwd2", "sojin");
+        UserDTO userDto = UserDTO.createUser("nullTest@google.com", "pwd2", "sojin", null, "성남", "1238호");
 
         System.out.println(userDto);
         System.out.println(userRepository.insert(userDto));
@@ -35,7 +35,7 @@ public class UserRepositoryTest {
         printList(userRepository.findAll());
     }
 
-    void printList(List<UserDto> users){
+    void printList(List<UserDTO> users){
         users.forEach(System.out::println);
     }
 
@@ -43,7 +43,7 @@ public class UserRepositoryTest {
     @Order(3)
     @DisplayName("U")
     void modify(){
-        UserDto userDto = UserDto.updateAddress(2L, "123456", "sample", "sample, smaple");
+        UserDTO userDto = UserDTO.update(2L,"PWd", "123456", "sample", "sample, smaple");
 
         System.out.println(userDto);
         System.out.println(userRepository.modify(userDto));
