@@ -4,38 +4,37 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.shop.repository.DeliveryRepository">
-    <select id="findAll" resultType="DeliveryDTO">
+<mapper namespace="com.shop.repository.NoticeRepository">
+    <select id="findAll" resultType="NoticeDTO">
         SELECT
             *
         FROM
-            delivery
+            notice
     </select>
 
-    <insert id="insert" parameterType="DeliveryDTO">
+    <insert id="insert" parameterType="NoticeDTO">
         INSERT INTO
-            delivery (order_id, tracking_num, recevier_name, recevier_phone, zip, address, address_detail)
-        VALUES (#{orderId}, #{trackingNum}, #{receiverName}, #{receiverPhone}, #{zip}, #{address}, #{addressDetail})
+            notice (created_by, title, contents, opened_date, last_modified_by)
+        VALUES (#{createdBy}, #{title}, #{contents}, #{openedDate}, #{expireDate}, #{status})
     </insert>
 
-    <update id="modify" parameterType="DeliveryDTO">
-        UPDATE delivery
+    <update id="modify" parameterType="NoticeDTO">
+        UPDATE notice
         SET
-            order_id = #{orderId},
-            tracking_num = #{trackingNum;},
-            recevier_name = #{receiverName},
-            recevier_phone = #{receiverPhone},
-            zip = #{zip},
-            address = #{address},
-            address_detail = #{addressDetail},
+            created_by = #{createdBy},
+            last_modified_by = #{lastModifiedBy},
+            title = #{title},
+            contents = #{contents},
+            opened_date = #{openedDate},
+            expire_date= = #{expireDate},
             status = #{status},
-            modified_dt = #{modifiedDate}
+            modified_date = #{modifiedDate}
         WHERE
-            id = #{id}
+            id=0
     </update>
 
     <delete id="delete">
-        DELETE FROM delivery
+        DELETE FROM notice
         WHERE id = #{id}
     </delete>
 

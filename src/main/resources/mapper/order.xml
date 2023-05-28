@@ -4,22 +4,22 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.shop.repository.DeliveryRepository">
-    <select id="findAll" resultType="DeliveryDTO">
+<mapper namespace="com.shop.repository.OrderRepository">
+    <select id="findAll" resultType="OrderDTO">
         SELECT
             *
         FROM
-            delivery
+            order
     </select>
 
-    <insert id="insert" parameterType="DeliveryDTO">
+    <insert id="insert" parameterType="OrderDTO">
         INSERT INTO
-            delivery (order_id, tracking_num, recevier_name, recevier_phone, zip, address, address_detail)
-        VALUES (#{orderId}, #{trackingNum}, #{receiverName}, #{receiverPhone}, #{zip}, #{address}, #{addressDetail})
+            order (size_option_id, user_id, count, price)
+        VALUES(#{sizeOptionId}, #{userId}, #{count}, #{price})
     </insert>
 
-    <update id="modify" parameterType="DeliveryDTO">
-        UPDATE delivery
+    <update id="modify" parameterType="OrderDTO">
+        UPDATE order
         SET
             order_id = #{orderId},
             tracking_num = #{trackingNum;},
@@ -35,7 +35,7 @@
     </update>
 
     <delete id="delete">
-        DELETE FROM delivery
+        DELETE FROM order
         WHERE id = #{id}
     </delete>
 
