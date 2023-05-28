@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shop.repository.PointRepository">
+
+    <select id="findAll" resultType="PointDTO">
+        SELECT
+            *
+        FROM
+            point
+    </select>
+
+    <select id="findById" resultType="PointDTO">
+        SELECT
+            *
+        FROM
+            point
+        WHERE
+            id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="PointDTO">
+        INSERT INTO
+            point
+                (user_id, cause_type, cause_id, cause_name, point, status, expire_date)
+        VALUES
+                (#{userId}, #{causeType}, #{causeId}, #{causeName}, #{point}, #{status}, #{expireDate})
+    </insert>
+
+
+    <update id="modify" parameterType="PointDTO">
+        UPDATE
+            point
+        SET
+            <if test="userId != null">user_id = #{userId}</if>,
+            <if test="causeType != null">cause_type = #{causeType}</if>,
+            <if test="causeId != null">cause_id = #{causeId}</if>,
+            <if test="point != null">point = #{point}</if>,
+            <if test="status != null">status = #{status}</if>,
+            <if test="expireDate != null">expire_date = #{expireDate}</if>,
+            <if test="modifiedDate != null">modified_date = #{modifiedDate}</if>
+        WHERE
+            id = #{id}
+    </update>
+
+
+    <delete id="deleteById">
+        DELETE
+        FROM
+            point
+        WHERE
+            id = #{id}
+    </delete>
+
+</mapper>

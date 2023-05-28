@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shop.repository.CategoryRepository">
+
+    <select id="findAll" resultType="CategoryDTO">
+        SELECT
+            *
+        FROM
+            category
+    </select>
+
+    <select id="findById" resultType="CategoryDTO">
+        SELECT
+            *
+        FROM
+            category
+        WHERE
+            id = #{id}
+    </select>
+
+    <select id="findByParentId" resultType="CategoryDTO">
+        SELECT
+            *
+        FROM
+            category
+        WHERE
+            parent_id = #{parentId}
+    </select>
+
+    <select id="findByContents" resultType="CategoryDTO">
+        SELECT
+            *
+        FROM
+            category
+        WHERE
+            contents LIKE '%'||#{contents}||'%'
+    </select>
+
+
+    <insert id="insert" parameterType="CategoryDTO">
+        INSERT INTO
+            category
+                (parent_id, contents, depth)
+        VALUES
+                (#{parentId}, #{contents}, #{depth})
+    </insert>
+
+
+    <update id="modify" parameterType="ProductDTO">
+        UPDATE
+            category
+        SET
+            <if test="productId != null">product_id = #{productId}</if>,
+            <if test="contents != null">contents = #{contents}</if>,
+            <if test="depth != null">depth = #{depth}</if>
+            modified_date = #{modifiedDate}
+        WHERE
+            id = #{id}
+    </update>
+
+
+    <delete id="deleteById">
+        DELETE
+        FROM
+            category
+        WHERE
+            id = #{id}
+    </delete>
+
+</mapper>
