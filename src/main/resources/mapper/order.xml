@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shop.repository.OrderRepository">
+    <select id="findAll" resultType="OrderDTO">
+        SELECT
+            *
+        FROM
+            order
+    </select>
+
+    <insert id="insert" parameterType="OrderDTO">
+        INSERT INTO
+            order (size_option_id, user_id, count, price)
+        VALUES(#{sizeOptionId}, #{userId}, #{count}, #{price})
+    </insert>
+
+    <update id="modify" parameterType="OrderDTO">
+        UPDATE order
+        SET
+            order_id = #{orderId},
+            tracking_num = #{trackingNum;},
+            recevier_name = #{receiverName},
+            recevier_phone = #{receiverPhone},
+            zip = #{zip},
+            address = #{address},
+            address_detail = #{addressDetail},
+            status = #{status},
+            modified_dt = #{modifiedDate}
+        WHERE
+            id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM order
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

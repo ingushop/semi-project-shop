@@ -5,33 +5,34 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.shop.repository.UserRepository">
-    <select id="findAll" resultType="UserDto">
+    <select id="findAll" resultType="UserDTO">
         SELECT
             *
         FROM
-            user_tb
+            user
     </select>
 
-    <insert id="insert" parameterType="UserDto">
+    <insert id="insert" parameterType="UserDTO">
         INSERT INTO
-            user_tb(email, pwd, name)
+            user(email, pwd, name, zip, address, address_detail)
         values
-            (#{email}, #{pwd}, #{name})
+            (#{email}, #{pwd}, #{name}, #{zip}, #{address}, #{addressDetail})
     </insert>
 
-    <update id="modify" parameterType="UserDto">
-        UPDATE user_tb
+    <update id="modify" parameterType="UserDTO">
+        UPDATE user
         SET
+            pwd = #{pwd},
             zip = #{zip},
             address = #{address},
-            address_detail = #{address_detail},
-            modified_dt = #{modified_dt}
+            address_detail = #{addressDetail},
+            modified_date = #{modifiedDate}
         WHERE
             id = #{id}
     </update>
 
     <delete id="delete">
-        DELETE FROM user_tb
+        DELETE FROM user
         WHERE id = #{id}
     </delete>
 

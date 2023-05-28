@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shop.repository.PaymentRepository">
+    <select id="findAll" resultType="PaymentDTO">
+        SELECT
+            *
+        FROM
+            payment
+    </select>
+
+    <insert id="insert" parameterType="PaymentDTO">
+        INSERT INTO
+            payment (user_id, order_id, payment)
+        VALUES (#{userId}, #{orderId}, #{payment})
+    </insert>
+
+    <update id="modify" parameterType="PaymentDTO">
+        UPDATE shop.payment
+        SET
+            user_id = #{userId},
+            order_id = #{orderId},
+            payment = #{payment},
+            status = #{status},
+            modified_date = #{modifiedDate},
+        WHERE
+            id=0
+    </update>
+
+    <delete id="delete">
+        DELETE FROM payment
+        WHERE id = #{id}
+    </delete>
+
+</mapper>
