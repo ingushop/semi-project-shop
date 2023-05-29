@@ -23,7 +23,7 @@ public class PointDTO {
 
     @Builder
     public PointDTO(Long id, Long userId, String causeType, Long causeId, String causeName, Long point,
-                    String status, LocalDateTime expireDate, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+                    String status, LocalDateTime expireDate, LocalDateTime modifiedDate) {
         this.id = id;
         this.userId = userId;
         this.causeType = causeType;
@@ -32,7 +32,6 @@ public class PointDTO {
         this.point = point;
         this.status = status;
         this.expireDate = expireDate;
-        this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
     }// constructor
 

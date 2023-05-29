@@ -21,14 +21,13 @@ public class ProductImageDTO {
     private LocalDateTime modifiedDate;
 
     @Builder
-    public ProductImageDTO(Long id, Long productId, String name, String path, String imageType,
-                           LocalDateTime createdDate, LocalDateTime modifiedDate) {
+    public ProductImageDTO(Long id, Long productId, String name,
+                           String path, String imageType, LocalDateTime modifiedDate) {
         this.id = id;
         this.productId = productId;
         this.name = name;
         this.path = path;
         this.imageType = imageType;
-        this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
     }// constructor
 

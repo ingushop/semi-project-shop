@@ -22,7 +22,7 @@ public class ModelDTO {
 
     @Builder
     public ModelDTO(Long id, String code, Long categoryId, String name, String contents,
-                    Long price, String status, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+                    Long price, String status, LocalDateTime modifiedDate) {
         this.id = id;
         this.code = code;
         this.categoryId = categoryId;
@@ -30,7 +30,6 @@ public class ModelDTO {
         this.contents = contents;
         this.price = price;
         this.status = status;
-        this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
     }// constructor
 

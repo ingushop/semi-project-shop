@@ -25,9 +25,9 @@ public class CategoryRepositoryTest {
     void insertTest() {
 
         CategoryDTO category1 = new CategoryDTO().builder()
-                        .contents("TOP")
-                        .depth(0)
-                        .build();
+                .contents("TOP")
+                .depth(0)
+                .build();
 
         CategoryDTO category2 = new CategoryDTO().builder()
                 .contents("BAG")
