@@ -28,7 +28,7 @@
         FROM
             model
         WHERE
-            categoryId = #{categoryId}
+            category_id = #{categoryId}
     </select>
 
     <select id="findByName" resultType="ModelDTO">
@@ -53,13 +53,13 @@
         UPDATE
             model
         SET
-            <if test="code != null"> code = #{code}</if>,
-            <if test="categoryId != null">category_id = #{categoryId}</if>,
-            <if test="name != null">name = #{name}</if>,
-            <if test="contents != null">contents = #{contents}</if>,
-            <if test="price != null">price = #{price}</if>,
-            <if test="status != null">status = #{status}</if>,
-            <if test="m != null">modified_date = #{modifiedDate}
+            <if test="code != null"> code = #{code},</if>
+            <if test="categoryId != null">category_id = #{categoryId},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="contents != null">contents = #{contents},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="status != null">status = #{status},</if>
+            modified_date = #{modifiedDate}
         WHERE
             id = #{id}
     </update>

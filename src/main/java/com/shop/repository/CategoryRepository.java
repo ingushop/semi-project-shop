@@ -17,6 +17,6 @@ public interface CategoryRepository {
 
     Integer insert(CategoryDTO categoryDTO);
     Integer modify(CategoryDTO categoryDTO);
-    Integer deleteById(Long id);
+    Integer deleteById(@Param("id") Long id);
 
 }// end interface

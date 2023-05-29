@@ -13,7 +13,7 @@ public interface ModelRepository {
     List<ModelDTO> findAll();
     ModelDTO findById(@Param("id") Long id);
     List<ModelDTO> findByCategoryId(@Param("categoryId") Long categoryId);
-    ModelDTO findByName(@Param("name") String name);
+    List<ModelDTO> findByName(@Param("name") String name);
     Integer insert(ModelDTO modelDTO);
     Integer modify(ModelDTO modelDTO);
     Integer deleteById(@Param("id") Long id);
