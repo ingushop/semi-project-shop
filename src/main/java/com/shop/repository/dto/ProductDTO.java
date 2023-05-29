@@ -19,14 +19,13 @@ public class ProductDTO {
     private LocalDateTime modifiedDate;
 
     @Builder
-    public ProductDTO(Long id, Long modelId, Long color, String code, String status,
-                      LocalDateTime createdDate, LocalDateTime modifiedDate) {
+    public ProductDTO(Long id, Long modelId, Long color,
+                      String code, String status, LocalDateTime modifiedDate) {
         this.id = id;
         this.modelId = modelId;
         this.color = color;
         this.code = code;
         this.status = status;
-        this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
     }// constructor
 

@@ -24,7 +24,7 @@ public class SizeOptionDTO {
 
     @Builder
     public SizeOptionDTO(Long id, Long productId, String value, Long price, Long stock,
-                         String status, Boolean use, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+                         String status, Boolean use, LocalDateTime modifiedDate) {
         this.id = id;
         this.productId = productId;
         this.value = value;
@@ -32,7 +32,6 @@ public class SizeOptionDTO {
         this.stock = stock;
         this.status = status;
         this.use = use;
-        this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
     }// constructor
 
