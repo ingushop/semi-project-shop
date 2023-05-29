@@ -1,5 +1,6 @@
 package com.shop.repository;
 
+import com.shop.repository.dto.ModelDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
@@ -7,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-
+import java.time.LocalDateTime;
 import java.util.List;
 
 @SpringBootTest
@@ -15,43 +16,72 @@ import java.util.List;
 public class ProductRepositoryTest {
 
 
-    @Autowired CategoryRepository categoryRepository;
-    @Autowired ModelRepository modelRepository;
-    @Autowired ProductRepository productRepository;
-    @Autowired SizeOptionRepository sizeOptionRepository;
+    @Autowired
+    ModelRepository modelRepository;
+
 
     @Test
     @Order(1)
-    @DisplayName("C")
-    void create(){
-        categoryRepository.
-    }
+    @DisplayName("insert")
+    void insertTest() {
+
+        ModelDTO model = new ModelDTO().builder()
+                .code("AAAA0002")
+                .categoryId(1L)
+                .name("AA02")
+                .contents("contents contents contents")
+                .price(100000L)
+                .status("IN_STOCK")
+                .build();
+
+        System.out.println(modelRepository.insert(model) == 1);
+    }//  insertTest
+
 
     @Test
     @Order(2)
-    @DisplayName("R")
-    void findAll(){
-        printList(modelRepository.findAll());
-    }
+    @DisplayName("findAll")
+    void findAllTest() {
 
-    void printList(List<Object> list){
-        list.forEach(System.out::println);
-    }
+        List<ModelDTO> results = modelRepository.findAll();
+
+        results.forEach(System.out::println);
+    }// findAllTest
 
     @Test
     @Order(3)
-    @DisplayName("U")
-    void modify(){
+    @DisplayName("findByCategoryId")
+    void findByCategoryId() {
 
+        List<ModelDTO> results = modelRepository.findByCategoryId(1L);
 
-    }
+        results.forEach(System.out::println);
+    }// findAllTest
 
     @Test
     @Order(4)
-    @DisplayName("D")
-    void delete(){
-        System.out.println(userRepository.delete(7L));
-    }
+    @DisplayName("findByName")
+    void findByNameTest() {
+
+        List<ModelDTO> results = modelRepository.findByName("AA01");
+
+        results.forEach(System.out::println);
+    }// findAllTest
+
+    @Test
+    @Order(5)
+    @DisplayName("modify")
+    void modifyTest() {
+
+        ModelDTO model = new ModelDTO().builder()
+                .id(1L)
+                .categoryId(2L)
+                .price(22222L)
+                .modifiedDate(LocalDateTime.now())
+                .build();
+
+        modelRepository.modify(model);
+    }// findAllTest
 
 }
 
