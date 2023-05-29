@@ -22,7 +22,7 @@ public class UserRepositoryTest {
     @Order(1)
     @DisplayName("C")
     void createUser(){
-        UserDTO userDto = UserDTO.createUser("nullTest@google.com", "pwd2", "sojin", null, "성남", "1238호");
+        UserDTO userDto = UserDTO.createUser("localDAteTest@google.com", "pwd2", "sojin", null, "성남", "1238호");
 
         System.out.println(userDto);
         System.out.println(userRepository.insert(userDto));
@@ -43,7 +43,7 @@ public class UserRepositoryTest {
     @Order(3)
     @DisplayName("U")
     void modify(){
-        UserDTO userDto = UserDTO.update(2L,"PWd", "123456", "sample", "sample, smaple");
+        UserDTO userDto = UserDTO.update(3L,"난 웨됌?", "123456", "sample", "sample, smaple");
 
         System.out.println(userDto);
         System.out.println(userRepository.modify(userDto));
