@@ -16,18 +16,20 @@ public class ModelDTO {
     private String name;
     private String contents;
     private Long price;
+    private String status;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
     @Builder
     public ModelDTO(Long id, String code, Long categoryId, String name, String contents,
-                    Long price, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+                    Long price, String status, LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.id = id;
         this.code = code;
         this.categoryId = categoryId;
         this.name = name;
         this.contents = contents;
         this.price = price;
+        this.status = status;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
     }// constructor

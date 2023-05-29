@@ -35,27 +35,27 @@
         UPDATE
             product
         SET
-            <if test ="modelId != null">model_id = #{modelId}</if>
-            <if test ="color != null">color = #{color}</if>
-            <if test ="code != null">code = #{code}</if>
-            <if test ="status != null">status = #{status}</if>
-            modified_dt = current_timestamp
-        WHERE
-            id = #{id}
-    </update>
-
-    <update id="modify" parameterType="ProductDTO">
-        UPDATE
-            product
-        SET
-            model_id = #{modelId}
-            color = #{color}
-            code = #{code}
-            status = #{status}
+            <if test ="modelId != null">model_id = #{modelId},</if>
+            <if test ="color != null">color = #{color},</if>
+            <if test ="code != null">code = #{code},</if>
+            <if test ="status != null">status = #{status},</if>
             modified_date = #{modifiedDate}
         WHERE
             id = #{id}
     </update>
+
+<!--    <update id="modify" parameterType="ProductDTO">-->
+<!--        UPDATE-->
+<!--            product-->
+<!--        SET-->
+<!--            model_id = #{modelId},-->
+<!--            color = #{color},-->
+<!--            code = #{code},-->
+<!--            status = #{status},-->
+<!--            modified_date = #{modifiedDate}-->
+<!--        WHERE-->
+<!--            id = #{id}-->
+<!--    </update>-->
 
     <!--*****************************************************************-->
 

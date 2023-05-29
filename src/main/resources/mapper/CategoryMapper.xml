@@ -37,7 +37,7 @@
         FROM
             category
         WHERE
-            contents LIKE '%'||#{contents}||'%'
+            contents = #{contents};
     </select>
 
 
@@ -54,10 +54,9 @@
         UPDATE
             category
         SET
-            <if test="productId != null">product_id = #{productId}</if>,
-            <if test="contents != null">contents = #{contents}</if>,
-            <if test="depth != null">depth = #{depth}</if>
-            modified_date = #{modifiedDate}
+            parent_id = #{parentId},
+            contents = #{contents},
+            depth = #{depth}
         WHERE
             id = #{id}
     </update>
