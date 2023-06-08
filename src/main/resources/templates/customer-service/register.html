@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>shop-cs</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+    <p th:text="'고객센터 > ' + ${pageName}">고객센터 그 어딘가</p>
+
+    <h1>문의하기</h1>
+
+    <form action="/inquiry/register" th:object="${inquiry}" method="post">
+        <p>여기에 정보를 입력하세요</p>
+        <div>
+            <label th:for="title">제목 : </label>
+            <input type="text" th:field="*{title}" placeholder="제목을 입력하세요"/>
+        </div> <br/>
+
+        <!-- radio button -->
+        <div>&lt;어떤 문의인가요?&gt;</div>
+        <div>
+            <label th:for="type">결제</label>
+            <input type="radio" th:field="*{type}" value="true"/>
+            <label th:for="type">배송</label>
+            <input type="radio" th:field="*{type}" value="false"/>
+            <label th:for="type">상품-사이즈</label>
+            <input type="radio" th:field="*{type}" value="false"/>
+            <label th:for="type">상품-재입고</label>
+            <input type="radio" th:field="*{type}" value="false"/>
+            <label th:for="type">주문</label>
+            <input type="radio" th:field="*{type}" value="false"/>
+            <label th:for="type">교환</label>
+            <input type="radio" th:field="*{type}" value="false"/>
+            <label th:for="type">반품</label>
+            <input type="radio" th:field="*{type}" value="false"/>
+        </div> <br/>
+
+<!--        <div>-->
+<!--            <div>&lt;학년&gt;</div>-->
+<!--            <div th:each="grade : ${grades}">-->
+<!--                <label th:for="${#ids.next('grade')}" th:text="${grade.description}"/>-->
+<!--                <input type="radio" th:field="*{grade}" th:value="${grade.name()}"/>-->
+<!--            </div>-->
+<!--        </div> <br/>-->
+
+<!--        &lt;!&ndash; single checkbox &ndash;&gt;-->
+<!--        <div>-->
+<!--            <div>&lt;재학 여부&gt;</div>-->
+<!--            <div>-->
+<!--                <label th:for="isAttending">재학중이면 체크하세요</label>-->
+<!--                <input type="checkbox" th:field="*{isAttending}" />-->
+<!--            </div>-->
+<!--        </div> <br/>-->
+
+<!--        &lt;!&ndash; multi checkbox &ndash;&gt;-->
+<!--        <div>-->
+<!--            <div>&lt;참여 활동&gt;</div>-->
+<!--            <div th:each="club : ${clubs}">-->
+<!--                <input type="checkbox" th:field="*{clubs}" th:value="${club.key}" />-->
+<!--                <label th:for="${#ids.prev('clubs')}" th:text="${club.value}" />-->
+<!--            </div>-->
+<!--        </div> <br/>-->
+
+<!--        &lt;!&ndash; select &ndash;&gt;-->
+<!--        <div>-->
+<!--            <div>&lt;전공&gt;</div>-->
+<!--            <select th:field="*{major}" style="width: 150px;">-->
+<!--                <option value="">전공을 선택하세요</option>-->
+<!--                <option th:each="major : ${majors}" th:value="${major}" th:text="${major}"/>-->
+<!--            </select>-->
+<!--        </div> <br/>-->
+
+        <div align="center">
+            <button type="button" th:onclick="|location.href='@{/list/}'|">취소</button>
+            <button type="submit" style="margin-left: 30px">추가</button>
+        </div>
+
+
+    </form>
+
+</body>
+</html>
