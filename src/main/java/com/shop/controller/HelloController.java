@@ -1,7 +1,7 @@
 package com.shop.controller;
 
 
-import com.shop.repository.dto.UserDTO;
+import com.shop.repository.dto.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,8 +33,8 @@ public class HelloController {
 
     @GetMapping("hello-api")
     @ResponseBody
-    public UserDTO helloApi(){
-        UserDTO user = UserDTO.createUser("testhhh24Email@google.com", "pwd2", "sojin", "12345", "성남", "1238호");
+    public User helloApi(){
+        User user = User.createUser("testhhh24Email@google.com", "pwd2", "sojin", "12345", "성남", "1238호");
 
         return user;
     }

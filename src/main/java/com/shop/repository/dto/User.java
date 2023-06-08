@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @ToString
-public class UserDTO {
+public class User {
     private Long id;
     private String email;
     private String pwd;
@@ -19,12 +19,12 @@ public class UserDTO {
     private String address;
     private String addressDetail;
     private String status;
-    private LocalDateTime createdDaTe;
+    private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
 
     @Builder
-    public UserDTO(Long id, String email, String pwd, String name, String zip, String address, String addressDetail, LocalDateTime modifiedDate, Long cash, Long point, String status) {
+    public User(Long id, String email, String pwd, String name, String zip, String address, String addressDetail, LocalDateTime modifiedDate, Long cash, Long point, String status) {
         this.id = id;
         this.email = email;
         this.pwd = pwd;
@@ -36,8 +36,8 @@ public class UserDTO {
         this.modifiedDate = modifiedDate;
     }
 
-    public static UserDTO createUser(String email, String pwd, String name, String zip, String address, String addressDetail) {
-        return new UserDTO().builder()
+    public static User createUser(String email, String pwd, String name, String zip, String address, String addressDetail) {
+        return new User().builder()
                 .email(email)
                 .pwd(pwd)
                 .name(name)
@@ -47,8 +47,8 @@ public class UserDTO {
                 .build();
     }
 
-    public static UserDTO update(Long id, String pwd, String zip, String address, String addressDetai) {
-        return new UserDTO().builder()
+    public static User update(Long id, String pwd, String zip, String address, String addressDetai) {
+        return new User().builder()
                 .id(id)
                 .pwd(pwd)
                 .zip(zip)

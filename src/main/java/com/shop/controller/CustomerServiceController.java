@@ -1,7 +1,8 @@
 package com.shop.controller;
 
 
-import com.shop.service.IncuiryService;
+import com.shop.repository.dto.Inquiry;
+import com.shop.service.InquiryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,66 +13,74 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/cs")
 public class CustomerServiceController {
 
-    private final IncuiryService inquiryService;
+    private final InquiryService inquiryService;
 
 
 
     @GetMapping
-      public String showCustomerServiceHomel(Model model){
+      public String showCustomerServiceHomel(){
 
         return "customer-service/home";
+    }
+
+    @GetMapping("exchange-return")
+    public String showExchangeReturn(Model model){
+
+        model.addAttribute("inquirys",inquiryService.findExchangeAndReturns());
+
+        return "customer-service/exchange-return-list";
+    }
+
+    @GetMapping("exchange-return/{id}")
+    public String showExchangeReturnDetail(Model model, @PathVariable("id") Long inquiryId){
+
+        model.addAttribute("inquiry",inquiryService.findById(inquiryId));
+
+        return "customer-service/product";
     }
 
     @GetMapping("payment-delivery")
     public String showPaymetAndDelivery(Model model){
 
-        model.addAttribute("pageName","결제 및 배송 문의");
-        model.addAttribute("inquirys",inquiryService.getPaymentAndDeliverys());
+        model.addAttribute("inquirys",inquiryService.findPaymentAndDeliverys());
 
-        return "customer-service/inquiry-list";
+        return "customer-service/payment-delivery-list";
+    }
+
+    @GetMapping("payment-delivery/{id}")
+    public String showPaymetAndDeliveryDetail(Model model, @PathVariable("id") Long inquiryId){
+
+        model.addAttribute("inquiry",inquiryService.findById(inquiryId));
+
+        return "customer-service/product";
     }
 
     @GetMapping("product")
     public String showProduct(Model model){
 
-        model.addAttribute("pageName","상품 관련 문의");
-        model.addAttribute("inquirys",inquiryService.getProducts());
+        model.addAttribute("inquirys",inquiryService.findProducts());
 
-        return "customer-service/inquiry-list";
+        return "customer-service/product-list";
     }
 
-    @GetMapping("exchange-return")
-    public String showxChangeReturn(Model model){
+    @GetMapping("product/{id}")
+    public String showProductDetail(Model model, @PathVariable("id") Long inquiryId){
 
-        model.addAttribute("pageName","교환 및 반품 문의");
-        model.addAttribute("inquirys",inquiryService.getExchangeAndReturns());
+        model.addAttribute("inquiry",inquiryService.findById(inquiryId));
 
-        return "customer-service/inquiry-list";
-    }
-
-    @GetMapping("inquiry/{id}")
-    public String showInquiryDetail(Model model, @PathVariable("id") Long inquiryId){
-
-        model.addAttribute("pageName","문의하기");
-        model.addAttribute("inquiry",inquiryService.getById(inquiryId));
-
-        return "customer-service/inquiry-detail";
+        return "customer-service/product";
     }
 
     @GetMapping("inquiry/register")
     public String showRegisterForm(Model model){
 
-        model.addAttribute("pageName","문의하기");
-
         return "customer-service/register";
     }
 
     @PostMapping("inquiry/register")
-    public String registerInquiry(Model model){
+    public void registerInquiry(@RequestParam Inquiry inquiryDTO){
 
-        model.addAttribute("pageName","문의하기");
-
-        return "customer-service/register";
+        inquiryService.register(inquiryDTO);
     }
 
 }

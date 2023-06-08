@@ -1,13 +1,15 @@
 package com.shop.repository.dto;
 
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Data
-public class InquiryDTO {
+@Setter
+@Getter
+@NoArgsConstructor
+@ToString
+public class Inquiry {
 
     private Long id;
     private Long userId;
@@ -23,7 +25,7 @@ public class InquiryDTO {
 
 
     @Builder
-    public InquiryDTO(Long id, Long userId, String type, String title, String contents, Boolean secret, String pw, String response, String status, LocalDateTime responsedDate) {
+    public Inquiry(Long id, Long userId, String type, String title, String contents, Boolean secret, String pw, String response, String status, LocalDateTime responsedDate) {
         this.id = id;
         this.userId = userId;
         this.type = type;
@@ -37,4 +39,4 @@ public class InquiryDTO {
     }
     
 
-} // end class
+}
