@@ -12,7 +12,6 @@ public interface InquiryRepository {
     List<Inquiry> findProducts();
     List<Inquiry> findExchangeAndReturns();
     Inquiry findById(Long id);
-    Integer register(Inquiry inquiryDTO);
-    Integer modify(Inquiry inquiryDTO);
+    Long register(Inquiry inquiryDTO);
     Integer deleteById(Long id);
 }

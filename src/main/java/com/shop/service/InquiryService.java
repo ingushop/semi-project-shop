@@ -33,8 +33,14 @@ public class InquiryService {
         return inquiryRepository.findById(id);
     }
 
-    public Integer register(Inquiry inquiryDTO) {
+    public Long register(Inquiry inquiryDTO){
 
         return inquiryRepository.register(inquiryDTO);
     }
+
+    public Integer delete(Long Id) {
+
+        return inquiryRepository.deleteById(Id);
+    }
+
 }

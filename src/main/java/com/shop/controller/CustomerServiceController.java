@@ -39,6 +39,14 @@ public class CustomerServiceController {
         return "customer-service/product";
     }
 
+    @GetMapping("exchange-return/register")
+    public String showExchangeReturnRegisterForm(Inquiry inquiryDto, Model model){
+
+        model.addAttribute("inquiry", inquiryDto);
+
+        return "customer-service/exchange-return-register-form";
+    }
+
     @GetMapping("payment-delivery")
     public String showPaymetAndDelivery(Model model){
 
@@ -53,6 +61,14 @@ public class CustomerServiceController {
         model.addAttribute("inquiry",inquiryService.findById(inquiryId));
 
         return "customer-service/product";
+    }
+
+    @GetMapping("payment-delivery/register")
+    public String showPaymetAndDeliveryRegisterForm(Inquiry inquiryDto, Model model){
+
+        model.addAttribute("inquiry", inquiryDto);
+
+        return "customer-service/payment-delivery-register-form";
     }
 
     @GetMapping("product")
@@ -71,16 +87,41 @@ public class CustomerServiceController {
         return "customer-service/product";
     }
 
-    @GetMapping("inquiry/register")
-    public String showRegisterForm(Model model){
+    @GetMapping("product/register")
+    public String showProductRegisterForm(Inquiry inquiryDto, Model model){
 
-        return "customer-service/register";
+        model.addAttribute("inquiry", inquiryDto);
+
+        return "customer-service/product-register-form";
     }
 
     @PostMapping("inquiry/register")
-    public void registerInquiry(@RequestParam Inquiry inquiryDTO){
+    public String registerInquiry(@ModelAttribute("inquiry") Inquiry inquiryDto){
 
-        inquiryService.register(inquiryDTO);
+        long inquiryId = inquiryService.register(inquiryDto);
+
+        switch (inquiryDto.getType()){
+            case "EXCHANGE", "RETURN" -> {
+                return "redirect:/cs/exchange-return/" + inquiryId;
+            }
+            case "PAYMENT", "DELIVERY" -> {
+                return "redirect:/cs/payment-delivery/" + inquiryId;
+            }
+            case "RPODUCT_SIZE", "PRODUCT_RESTOCK" -> {
+                return "redirect:/cs/product/" + inquiryId;
+            }
+        }
+
+        return "redirect:/cs";
     }
+
+    @DeleteMapping("*/{id}/delete")
+    public String deleteInquiry(@PathVariable("id") Long inquiryId){
+
+        inquiryService.delete(inquiryId);
+
+        return "redirect:/cs";
+    }
+
 
 }
