@@ -6,37 +6,20 @@
 
 <mapper namespace="com.shop.repository.InquiryRepository">
 
-    <select id="findPaymentAndDeliverys" resultType="Inquiry">
+    <select id="findByTypes" resultType="Inquiry">
         SELECT
             *
         FROM
             inquiry
         WHERE
-            type IN ('PAYMENT', 'DELIVERY')
+            <foreach item="type" collection="types"
+                     open="type IN (" separator="," close=")" nullable="true">
+                #{type}
+            </foreach>
             AND
             NOT status = 'DELETED'
-    </select>
-
-    <select id="findProducts" resultType="Inquiry">
-        SELECT
-            *
-        FROM
-            inquiry
-        WHERE
-            type IN ('RPODUCT_SIZE', 'PRODUCT_RESTOCK')
-            AND
-            NOT status = 'DELETED'
-    </select>
-
-    <select id="findExchangeAndReturns" resultType="Inquiry">
-        SELECT
-            *
-        FROM
-            inquiry
-        WHERE
-            type IN ('EXCHANGE', 'RETURN')
-            AND
-            NOT status = 'DELETED'
+        ORDER BY
+            id DESC
     </select>
 
     <select id="findById" resultType="Inquiry">
@@ -48,21 +31,14 @@
             id = #{id}
     </select>
 
-    <insert id="register" parameterType="Inquiry">
+    <insert id="save" parameterType="Inquiry">
         INSERT INTO
             inquiry(user_id, type, title, contents, secret, pw)
         VALUES
             (#{userId}, #{type}, #{title}, #{contents}, #{secret}, #{pw})
-
-        <selectKey keyProperty="id" resultType="long" order="AFTER">
-            SELECT
-                max(id)
-            FROM
-                inquiry
-        </selectKey>
     </insert>
 
-    <update id="deleteById">
+    <update id="updateStatusToDeleted">
         UPDATE
             inquiry
         SET

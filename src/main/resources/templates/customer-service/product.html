@@ -19,6 +19,8 @@
     <p th:text="'비밀글여부 > ' + ${inquiry.secret}">고객센터 그 어딘가</p>
     <p th:text="'비밀번호 > ' + ${inquiry.pw}">고객센터 그 어딘가</p>
 
+    <br>
+    <a th:href="@{'inquiry/'+ ${inquiry.id} + '/response'}">답변달기</a>
 
 </body>
 </html>

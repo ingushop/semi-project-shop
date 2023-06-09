@@ -13,19 +13,9 @@ public class InquiryService {
 
     private final InquiryRepository inquiryRepository;
 
-    public List<Inquiry> findPaymentAndDeliverys(){
+    public List<Inquiry> findByTypes(String... types){
 
-        return inquiryRepository.findPaymentAndDeliverys();
-    }
-
-    public List<Inquiry> findProducts(){
-
-        return inquiryRepository.findProducts();
-    }
-
-    public List<Inquiry> findExchangeAndReturns(){
-
-        return inquiryRepository.findExchangeAndReturns();
+        return inquiryRepository.findByTypes(types);
     }
 
     public Inquiry findById(Long id){
@@ -33,14 +23,14 @@ public class InquiryService {
         return inquiryRepository.findById(id);
     }
 
-    public Long register(Inquiry inquiryDTO){
+    public Integer save(Inquiry inquiry){
 
-        return inquiryRepository.register(inquiryDTO);
+        return inquiryRepository.save(inquiry);
     }
 
-    public Integer delete(Long Id) {
+    public Integer updateStatusToDeleted(Long Id) {
 
-        return inquiryRepository.deleteById(Id);
+        return inquiryRepository.updateStatusToDeleted(Id);
     }
 
 }

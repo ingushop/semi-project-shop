@@ -13,7 +13,7 @@
         <br>
             <td th:text="${inquiry.id}">100</td>
             <td th:text="${inquiry.userId}">100</td>
-            <a th:href="@{'payment-delivery/'+ ${inquiry.id}}">
+            <a th:href="@{'inquiry/'+ ${inquiry.id}}">
                 <td th:text="'[' + ${inquiry.type} + ']' + ${inquiry.title}">100</td>
             </a>
             <td th:text="${inquiry.createdDate}">100</td>

@@ -31,7 +31,7 @@ public class InquiryRepositoryTest {
                     .secret(false)
                     .build();
 
-            inquiryRepository.register(exchangeInqiry);
+            inquiryRepository.save(exchangeInqiry);
 
             Inquiry deliveryInquiry = Inquiry.builder()
                     .userId(1l)
@@ -41,7 +41,7 @@ public class InquiryRepositoryTest {
                     .secret(false)
                     .build();
 
-            inquiryRepository.register(deliveryInquiry);
+            inquiryRepository.save(deliveryInquiry);
 
             Inquiry productInquiry = Inquiry.builder()
                     .userId(1l)
@@ -51,19 +51,21 @@ public class InquiryRepositoryTest {
                     .secret(false)
                     .build();
 
-            inquiryRepository.register(productInquiry);
+            inquiryRepository.save(productInquiry);
         }
     }
 
     @Test
     @DisplayName("R")
     void findAll(){
-        System.out.println("findExchangeAndReturns");
-        printList(inquiryRepository.findExchangeAndReturns());
-        System.out.println("findPaymentAndDeliverys");
-        printList(inquiryRepository.findPaymentAndDeliverys());
-        System.out.println("findProducts");
-        printList(inquiryRepository.findProducts());
+    }
+
+    @Test
+    @DisplayName("R")
+    void find(){
+        Inquiry inquiry = inquiryRepository.findById(316l);
+
+        System.out.println(inquiry);
     }
 
     void printList(List<?> list){

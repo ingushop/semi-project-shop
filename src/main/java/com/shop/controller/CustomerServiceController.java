@@ -15,8 +15,6 @@ public class CustomerServiceController {
 
     private final InquiryService inquiryService;
 
-
-
     @GetMapping
       public String showCustomerServiceHomel(){
 
@@ -26,23 +24,16 @@ public class CustomerServiceController {
     @GetMapping("exchange-return")
     public String showExchangeReturn(Model model){
 
-        model.addAttribute("inquirys",inquiryService.findExchangeAndReturns());
+        model.addAttribute("inquirys",inquiryService.findByTypes("EXCHANGE", "RETURN"));
 
         return "customer-service/exchange-return-list";
     }
 
-    @GetMapping("exchange-return/{id}")
-    public String showExchangeReturnDetail(Model model, @PathVariable("id") Long inquiryId){
-
-        model.addAttribute("inquiry",inquiryService.findById(inquiryId));
-
-        return "customer-service/product";
-    }
-
     @GetMapping("exchange-return/register")
-    public String showExchangeReturnRegisterForm(Inquiry inquiryDto, Model model){
+    public String showExchangeReturnRegisterForm(Model model){
 
-        model.addAttribute("inquiry", inquiryDto);
+//        model.addAttribute("inquiry", new Inquiry());
+        model.addAttribute("inquiry", Inquiry.builder().build());
 
         return "customer-service/exchange-return-register-form";
     }
@@ -50,23 +41,16 @@ public class CustomerServiceController {
     @GetMapping("payment-delivery")
     public String showPaymetAndDelivery(Model model){
 
-        model.addAttribute("inquirys",inquiryService.findPaymentAndDeliverys());
+        model.addAttribute("inquirys",inquiryService.findByTypes("PAYMENT", "DELIVERY"));
 
         return "customer-service/payment-delivery-list";
     }
 
-    @GetMapping("payment-delivery/{id}")
-    public String showPaymetAndDeliveryDetail(Model model, @PathVariable("id") Long inquiryId){
-
-        model.addAttribute("inquiry",inquiryService.findById(inquiryId));
-
-        return "customer-service/product";
-    }
-
     @GetMapping("payment-delivery/register")
-    public String showPaymetAndDeliveryRegisterForm(Inquiry inquiryDto, Model model){
+    public String showPaymetAndDeliveryRegisterForm(Model model){
 
-        model.addAttribute("inquiry", inquiryDto);
+//        model.addAttribute("inquiry", new Inquiry());
+        model.addAttribute("inquiry", Inquiry.builder().build());
 
         return "customer-service/payment-delivery-register-form";
     }
@@ -74,54 +58,90 @@ public class CustomerServiceController {
     @GetMapping("product")
     public String showProduct(Model model){
 
-        model.addAttribute("inquirys",inquiryService.findProducts());
+        model.addAttribute("inquirys",inquiryService.findByTypes("RPODUCT_SIZE", "PRODUCT_RESTOCK"));
 
         return "customer-service/product-list";
     }
 
-    @GetMapping("product/{id}")
-    public String showProductDetail(Model model, @PathVariable("id") Long inquiryId){
-
-        model.addAttribute("inquiry",inquiryService.findById(inquiryId));
-
-        return "customer-service/product";
-    }
-
     @GetMapping("product/register")
-    public String showProductRegisterForm(Inquiry inquiryDto, Model model){
+    public String showProductRegisterForm(Model model){
 
-        model.addAttribute("inquiry", inquiryDto);
+//        model.addAttribute("inquiry", new Inquiry());
+        model.addAttribute("inquiry", Inquiry.builder().build());
 
         return "customer-service/product-register-form";
     }
 
-    @PostMapping("inquiry/register")
-    public String registerInquiry(@ModelAttribute("inquiry") Inquiry inquiryDto){
+    @GetMapping("inquiry/{id}")
+    public String showInquiryDetail(Model model, @PathVariable("id") Long id){
 
-        long inquiryId = inquiryService.register(inquiryDto);
+        Inquiry inquiry = inquiryService.findById(id);
 
-        switch (inquiryDto.getType()){
+        model.addAttribute("inquiry",inquiry);
+
+        switch (inquiry.getType()){
             case "EXCHANGE", "RETURN" -> {
-                return "redirect:/cs/exchange-return/" + inquiryId;
+                return "customer-service/exchange-return";
             }
             case "PAYMENT", "DELIVERY" -> {
-                return "redirect:/cs/payment-delivery/" + inquiryId;
+                return "customer-service/payment-delivery";
             }
-            case "RPODUCT_SIZE", "PRODUCT_RESTOCK" -> {
-                return "redirect:/cs/product/" + inquiryId;
+//            case "RPODUCT_SIZE", "PRODUCT_RESTOCK" -> {
+            default -> {
+                return "customer-service/product";
             }
         }
-
-        return "redirect:/cs";
     }
 
-    @DeleteMapping("*/{id}/delete")
+    @GetMapping("inquiry/{id}/response")
+    public String showInquiryReponse(Model model, @PathVariable("id") Long id){
+
+        Inquiry inquiry = inquiryService.findById(id);
+
+        model.addAttribute("inquiry",inquiry);
+
+        switch (inquiry.getType()){
+            case "EXCHANGE", "RETURN" -> {
+                return "customer-service/exchange-return";
+            }
+            case "PAYMENT", "DELIVERY" -> {
+                return "customer-service/payment-delivery";
+            }
+//            case "RPODUCT_SIZE", "PRODUCT_RESTOCK" -> {
+            default -> {
+                return "customer-service/product";
+            }
+        }
+    }
+
+    @PostMapping("inquiry/register")
+    public String registerInquiry(Inquiry inquiry){
+
+        System.err.println(">>>>>>>>>>>>>>>>>>>>>>>>>>" + inquiry);
+
+        inquiryService.save(inquiry);
+
+        switch (inquiry.getType()){
+            case "EXCHANGE", "RETURN" -> {
+                return "redirect:/cs/exchange-return";
+            }
+            case "PAYMENT", "DELIVERY" -> {
+                return "redirect:/cs/payment-delivery";
+            }
+//            case "RPODUCT_SIZE", "PRODUCT_RESTOCK" -> {
+            default -> {
+                return "redirect:/cs/product";
+            }
+        }
+    }
+
+
+    @PatchMapping("*/{id}/delete")
     public String deleteInquiry(@PathVariable("id") Long inquiryId){
 
-        inquiryService.delete(inquiryId);
+        inquiryService.updateStatusToDeleted(inquiryId);
 
         return "redirect:/cs";
     }
-
 
 }
